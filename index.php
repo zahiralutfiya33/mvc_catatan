@@ -1,77 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <title>Kelola kategori</title>
-    <link rel="stylesheet" href="public/css/kategori.css">
+    <title>dashboard</title>
+    <link rel="stylesheet" href="public/css/dashboard.css">
     <style>
-        body {
-            display: block;
-        }
-    </style>
+    body{
+        display: block;
+        background-color: #f4f4f9;
+    }
+</style>
 </head>
-
 <body>
-    <?php
-    include "app/views/components/nav.php";
-    ?>
-    <div class="container" style="margin-top: 80px;">
-        <div class="card">
-            <h2>Daftar kategori</h2>
-            <a href="index.php?act=kategori-tambah" class="btn btn-primary">Tambah</a>
-            <table>
-                <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Nama Kategori</th>
-                        <th>Dibuat Oleh</th>
-                        <th style="text-align: center; width: 200px;">Aksi</th>
-                    </tr>
-                </thead>
-        <tbody>
-            <?php if (isset($_SESSION['success_msg'])): ?>
-                <div class="success-message">
-                    <?= $_SESSION['success_msg']; ?>
-                </div>
-                <?php
-                unset($_SESSION['success_msg']);
-                ?>
-            <?php endif; ?>
+    <nav class="navbar">
+        <a class="navbar-brand" href="#">Notes app</a>
+        <a href="index.php?act=catatan" class="btn btn-danger">Catatan</a>
+        <a href="index.php?act=kategori" class="btn btn-danger">Kategori</a>
+        <a href="index.php?act=logout" class="btn btn-danger">Logout</a>
+    </nav>
 
-
-            <?php
-            $no = 1;
-            if (!empty($data_kategori) > 0):
-                foreach ($data_kategori as $row): ?>
-                    <tr>
-                        <td style="text-align: center; width: 50px;">
-                            <?=$no ?>
-                        </td>
-                        <td>
-                            <?=$row['nama_kategori'] ?>
-                        </td>
-                        <td>
-                            <?=$row['nama_admin'] ?>
-                        </td>
-                        <td>
-                            <a href="index.php?act=kategori-edit&id=<?= $row['id'] ?>"
-                            class="btn-red">Edit</a>
-                            <a href="index.php?act=kategori-hapus&id=<?= $row['id'] ?>" class="btn-red"
-                                onclick="return confirm('Yakin ingin menghapus kategori ini?')">Hapus</a>
-                        </td>
-                    </tr>
-                <?php
-                $no++;
-                endforeach; ?>
-
-                <?php else: ?>
-                    <tr>
-                        <td colspan="3" style="text-align:center;">Belum ada kategori.</td>
-                    </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
+<div class="container-dashboard" style="margin-top: 80px;">
+    <div class="card">
+    <h3>Selamat Datang, <?php echo isset($_SESSION['username']) ? htmlspecialchars($_SESSION['username']) : 'Admin'; ?>!</h3> <p>Ini adalah halaman dashboard admin.</p>
     </div>
 </div>
 </body>
-
 </html>
